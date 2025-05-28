@@ -121,19 +121,21 @@ class CompanyController extends Controller
     *     )
     * )
     */
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $companyRequest, Company $company)
     {
         try {
-            $company->update($request->validated());
+            $validated = $companyRequest->validated();
+
+            $company->update($validated);
 
             return response()->json([
                 'data' => new CompanyResource($company),
                 'message' => 'Company updated successfully'
-            ]);
-            
+            ], 200);
+
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update company',
+                'message' => 'Failed to update contact',
                 'error' => $e->getMessage()
             ], 500);
         }
