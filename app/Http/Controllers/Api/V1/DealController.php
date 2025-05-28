@@ -11,9 +11,17 @@ use Illuminate\Http\Request;
 class DealController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function show(Request $request)
+    * @OA\Get(
+    *     path="/api/v1/deals",
+    *     summary="List all deals",
+    *     tags={"Deals"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="List all deals"
+    *     )
+    * )
+    */
+    public function index(Request $request)
     {
         $query = Deal::query()
             ->with(['contact']);
@@ -29,9 +37,17 @@ class DealController extends Controller
         return DealResource::collection($query->paginate());
     }
 
-     /**
-     * Store a newly created resource in storage.
-     */
+    /**
+    * @OA\Post(
+    *     path="/api/v1/deals",
+    *     summary="Updates a del",
+    *     tags={"Deals"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Updates a deal"
+    *     )
+    * )
+    */
     public function store(DealRequest $request)
     {
         try {
@@ -51,8 +67,16 @@ class DealController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+    * @OA\Put(
+    *     path="/api/v1/deals/{deal}",
+    *     summary="Updates a Deal",
+    *     tags={"Deals"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Updates a deal"
+    *     )
+    * )
+    */
     public function update(DealRequest $dealRequest, Deal $deal)
     {
         try {
@@ -74,8 +98,16 @@ class DealController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
+    * @OA\Delete(
+    *     path="/api/v1/deals/{deal}",
+    *     summary="Deletes a Deal",
+    *     tags={"Deals"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="it makes a Soft Delete of an specific Deal"
+    *     )
+    * )
+    */
     public function destroy(Deal $deal)
     {
         $deal->delete();

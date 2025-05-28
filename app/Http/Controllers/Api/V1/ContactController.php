@@ -11,9 +11,17 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function show(Request $request)
+    * @OA\Get(
+    *     path="/api/v1/contacts",
+    *     summary="List all contacs",
+    *     tags={"Contacts"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="List of Contacts, it could filter by an specific email"
+    *     )
+    * )
+    */
+    public function index(Request $request)
     {
         $query = Contact::query()
             ->with(['company', 'deals']);
@@ -31,8 +39,16 @@ class ContactController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+    * @OA\Put(
+    *     path="/api/v1/contacts/{contact}",
+    *     summary="Updates a contact",
+    *     tags={"Contacts"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Updates a contact"
+    *     )
+    * )
+    */
     public function update(ContactRequest $contactRequest, Contact $contact)
     {
        try {
@@ -54,8 +70,16 @@ class ContactController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
+    * @OA\Delete(
+    *     path="/api/v1/contacts/{contact}",
+    *     summary="Deletes a contact",
+    *     tags={"Contacts"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="it makes a Soft Delete of an specific Contact"
+    *     )
+    * )
+    */
     public function destroy(Contact $contact)
     {
         $contact->delete();

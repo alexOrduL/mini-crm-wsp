@@ -13,10 +13,18 @@ use App\Models\Contact;
 
 class CompanyController extends Controller
 {
-      /**
-     * Display the specified resource.
-     */
-   public function show(Request $request)
+    /**
+    * @OA\Get(
+    *     path="/api/v1/companies",
+    *     summary="List all companies",
+    *     tags={"Companies"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="List of Companies"
+    *     )
+    * )
+    */
+   public function index(Request $request)
     {
         $withTrashed = $request->boolean('withTrashed');
 
@@ -41,8 +49,16 @@ class CompanyController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
-     */
+    * @OA\Post(
+    *     path="/api/v1/companies",
+    *     summary="Create a new company",
+    *     tags={"Companies"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Create Company"
+    *     )
+    * )
+    */
     public function store(CompanyRequest $request)
     {
         try {
@@ -62,8 +78,16 @@ class CompanyController extends Controller
     }
 
     /**
-     * attach a newly created resource in storage.
-     */
+    * @OA\Post(
+    *     path="/api/v1/companies/{companyId}/contacts",
+    *     summary="Create a new contact",
+    *     tags={"Contacts","Companies"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Create a new Contact with a relationship with a Company"
+    *     )
+    * )
+    */
     public function attachContact(ContactRequest $contactRequest, $companyId)
     {
         try {
@@ -87,8 +111,16 @@ class CompanyController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
-     */
+    * @OA\Put(
+    *     path="/api/v1/companies/{company}",
+    *     summary="Updates a company",
+    *     tags={"Companies"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="Updates a Company"
+    *     )
+    * )
+    */
     public function update(Request $request, Company $company)
     {
         try {
@@ -108,8 +140,16 @@ class CompanyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
+    * @OA\Delete(
+    *     path="/api/v1/companies/{companie}",
+    *     summary="Deletes a company",
+    *     tags={"Companies"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="it makes a Soft Delete of an specific Company"
+    *     )
+    * )
+    */
     public function destroy(Company $company)
     {
         $company->delete();
