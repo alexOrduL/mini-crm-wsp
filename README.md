@@ -25,17 +25,29 @@ A lightweight CRM backend built in Laravel, offering versioned RESTful APIs to m
 
 ### Setup
 
-```bash
-docker compose up -d --build
-docker exec -it laravel_app bash
-cp .env.docker.example .env
-composer i
-php artisan key:generate
-```
+- Build docker:
+  ```bash
+  docker compose up -d --build
+  docker exec -it laravel_app bash
+  ```
+- Install dependencies:
+  ```bash
+  composer i
+  ```
+
+- Create the env file:
+
+  ```bash
+  cp .env.docker.example .env
+  php artisan key:generate
+  ```
 
 ## 🧪 Testing
-To run the tests use command:
+
+To run the tests use commands:
+(**Uncomment testing variables and comment production variables before runing tests**)
 ```bash
+cp .env .env.testing
 php artisan test
 ```
 
