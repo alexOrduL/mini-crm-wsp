@@ -1,0 +1,68 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mini CRM API",
+        "description": "A versioned REST API for managing companies, contacts, and deals",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Localhost server"
+        }
+    ],
+    "paths": {
+        "/api/v1/deals": {
+            "get": {
+                "tags": [
+                    "Deals"
+                ],
+                "summary": "List all deals",
+                "operationId": "df944ffa00d3dc787791e326c195ca6c",
+                "responses": {
+                    "200": {
+                        "description": "List all deals",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "uuid"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Website redesign"
+                                            },
+                                            "amount": {
+                                                "type": "number",
+                                                "example": 1200
+                                            },
+                                            "currency": {
+                                                "type": "string",
+                                                "example": "USD"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "open"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Deals",
+            "description": "Deals"
+        }
+    ]
+}
