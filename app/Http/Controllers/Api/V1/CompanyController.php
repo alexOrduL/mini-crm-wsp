@@ -16,23 +16,29 @@ class CompanyController extends Controller
       /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+   public function show(Request $request)
     {
-        $query = Company::query()
-            ->with(['contacts', 'deals']);
+        $withTrashed = $request->boolean('withTrashed');
 
-        if ($request->has('email')) {
+        $query = Company::query()
+            ->with([
+                'contacts' => fn($q) => $withTrashed ? $q->withTrashed() : $q,
+                'deals' => fn($q) => $withTrashed ? $q->withTrashed() : $q,
+            ]);
+
+        if ($request->filled('email')) {
             $query->whereHas('contacts', function($q) use ($request) {
-              $q->where('email', $request->email);
+                $q->where('email', $request->email);
             });
         }
 
-        if ($request->has('withTrashed') && $request->boolean('withTrashed')) {
+        if ($withTrashed) {
             $query->withTrashed();
         }
 
         return CompanyResource::collection($query->paginate());
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -90,7 +96,7 @@ class CompanyController extends Controller
 
             return response()->json([
                 'data' => new CompanyResource($company),
-                'message' => 'Company updated successfully' // Cambiado de "Contact" a "Company"
+                'message' => 'Company updated successfully'
             ]);
             
         } catch (\Exception $e) {
