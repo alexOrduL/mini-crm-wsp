@@ -10,10 +10,10 @@ A lightweight CRM backend built in Laravel, offering versioned RESTful APIs to m
 - Attach contacts to companies
 - List deals for a contact
 - Filter contacts by email and deals by status
-<!-- - CSV import with idempotent logic -->
+- CSV import with idempotent logic
 - Soft deletes with optional `?withTrashed=true` query
 - Swagger/OpenAPI documentation
-<!-- - Automated tests with PHPUnit -->
+- Automated tests with Pest
 - Dockerized stack
 <!-- - PSR-12 + SOLID principles -->
 
@@ -31,13 +31,12 @@ docker exec -it laravel_app bash
 cp .env.docker.example .env
 composer i
 php artisan key:generate
+```
 
---seed
-# create db
-php artisan migrate
-#to generate db with seeders
-php artisan migrate --seed 
-l5-swagger:generate
+## 🧪 Testing
+To run the tests use command:
+```bash
+php artisan test
 ```
 
 ## 📝 Import sample data
@@ -54,6 +53,12 @@ company_id,company_name,company_domain,contact_id,first_name,last_name,email,pho
 ```
 ## 🖥️ Check Database
 
-- Access to http://localhost:8082/
+```bash
+# create db
+php artisan migrate
+#to generate db with seeders
+php artisan migrate --seed 
+```
+Access to http://localhost:8082/
   - Username: laravel
   - Password: secret
