@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\V1\DealController;
 Route::prefix('v1')->group(function () {
     Route::get('companies', [CompanyController::class, 'index']);
     Route::post('companies', [CompanyController::class, 'store']);
-    Route::put('companies/{company}', [CompanyController::class, 'store']);
+    Route::put('companies/{company}', [CompanyController::class, 'update']);
     Route::delete('companies/{company}', [CompanyController::class, 'destroy']);
     
     Route::get('contacts', [ContactController::class, 'index']);
