@@ -16,8 +16,7 @@ class Contact extends Model
         'first_name',
         'last_name',
         'email',
-        'phone',
-        'position'
+        'phone'
     ];
     protected $hidden = ['deleted_at'];
 
