@@ -1,0 +1,9 @@
+company_id,company_name,company_domain,contact_id,first_name,last_name,email,phone,deal_id,title,amount,currency,status
+c1c35e0e-0001-4000-bb01-000000000001,Acme Inc.,acme.example.com,a1c35e0e-1001-4000-bb01-000000000001,Alice,Walker,alice@acme.com,123456789,d1c35e0e-2001-4000-bb01-000000000001,Design work,1200,USD,open
+c1c35e0e-0001-4000-bb01-000000000001,Acme Inc.,acme.example.com,a1c35e0e-1002-4000-bb01-000000000002,Bob,Gray,bob@acme.com,123456700,d1c35e0e-2002-4000-bb01-000000000002,Consulting,3000,USD,closed-won
+c1c35e0e-0002-4000-bb01-000000000002,Globex Corp.,globex.example.com,a1c35e0e-1003-4000-bb01-000000000003,Charlie,Day,charlie@globex.com,111222333,d1c35e0e-2003-4000-bb01-000000000003,Ad campaign,4400,USD,open
+c1c35e0e-0002-4000-bb01-000000000002,Globex Corp.,globex.example.com,a1c35e0e-1004-4000-bb01-000000000004,Dana,Scott,dana@globex.com,444555666,d1c35e0e-2004-4000-bb01-000000000004,SEO audit,2100,USD,closed-lost
+,,,a1c35e0e-1005-4000-bb01-000000000005,Eva,Green,eva@freelance.com,888888888,d1c35e0e-2005-4000-bb01-000000000005,Landing page,700,USD,open
+,,,a1c35e0e-1006-4000-bb01-000000000006,Frank,Ocean,frank@indie.com,777777777,d1c35e0e-2006-4000-bb01-000000000006,Logo design,600,USD,closed-won
+c1c35e0e-0002-4000-bb01-000000000002,Globex Corp.,globex.example.com,a1c35e0e-1003-4000-bb01-000000000003,Charlie,Day,charlie@globex.com,111222333,d1c35e0e-2007-4000-bb01-000000000007,Maintenance,800,USD,open
+c1c35e0e-0001-4000-bb01-000000000001,Acme Inc.,acme.example.com,a1c35e0e-1002-4000-bb01-000000000002,Bob,Gray,bob@acme.com,123456700,d1c35e0e-2008-4000-bb01-000000000008,Support plan,500,USD,closed-won
