@@ -22,17 +22,18 @@ class ImportSampleData extends Command
             return Command::FAILURE;
         }
 
-        $csv = Reader::createFromPath($path, 'r');
-        $csv->setHeaderOffset(0);
-        $records = $csv->getRecords();
-
-        DB::beginTransaction();
-
         try {
+            $csv = Reader::createFromPath($path, 'r');
+            $csv->setHeaderOffset(0);
+            $records = $csv->getRecords();
+
+            DB::beginTransaction();
+
             foreach ($records as $record) {
                 $company = null;
+
                 if (!empty($record['company_domain'])) {
-                    $company = Company::firstOrCreate(
+                    $company = Company::updateOrCreate(
                         ['domain' => $record['company_domain']],
                         [
                             'id' => $record['company_id'],
@@ -41,7 +42,7 @@ class ImportSampleData extends Command
                     );
                 }
 
-                $contact = Contact::firstOrCreate(
+                $contact = Contact::updateOrCreate(
                     ['email' => $record['email']],
                     [
                         'id' => $record['contact_id'],
@@ -52,12 +53,12 @@ class ImportSampleData extends Command
                     ]
                 );
 
-                Deal::firstOrCreate(
+                Deal::updateOrCreate(
                     ['id' => $record['deal_id']],
                     [
                         'contact_id' => $contact->id,
                         'title' => $record['title'],
-                        'amount' => $record['amount'],
+                        'amount' => (float) $record['amount'], // 👈 casteo importante
                         'currency' => $record['currency'],
                         'status' => $record['status'],
                     ]
@@ -67,10 +68,9 @@ class ImportSampleData extends Command
             DB::commit();
             $this->info('Sample data imported successfully.');
             return Command::SUCCESS;
-
         } catch (\Throwable $e) {
             DB::rollBack();
-            $this->error('Import failed: ' . $e->getMessage());
+            $this->error('❌ Import failed: ' . $e->getMessage());
             return Command::FAILURE;
         }
     }
